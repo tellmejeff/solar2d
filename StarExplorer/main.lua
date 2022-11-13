@@ -30,9 +30,14 @@ local background = display.newImageRect(backGroup, 'background.png', 800, 1400)
 background.x = display.contentCenterX
 background.y = display.contentCenterY
 
+local status = display.newRect(backGroup, 0, 0, 1400, 85)
+status:setFillColor(0.3, 0.3, 0.3)
+status.strokeWidth = 3
+status:setStrokeColor(0.4, 0.4, 0.4)
+
 -- pause / play button
 local pausePlay = display.newImageRect(uiGroup, 'pause.png', 48, 48)
-pausePlay.x = display.contentWidth - 150
+pausePlay.x = display.contentWidth - 120
 pausePlay.y = 80
 
 local function pauseOrPlayGame()
@@ -48,7 +53,7 @@ local function pauseOrPlayGame()
         pausePlay = display.newImageRect(uiGroup, 'play.png', 48, 48)
         paused = true
     end
-    pausePlay.x = display.contentWidth - 150
+    pausePlay.x = display.contentWidth - 120
     pausePlay.y = 80
     pausePlay:addEventListener('tap', pauseOrPlayGame)
 end

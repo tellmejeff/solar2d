@@ -52,12 +52,12 @@ module.fireLaser = function(offset)
 end
 
 module.fireLasers = function()
-    module.fireLaser(-40)
     module.fireLaser(-20)
     module.fireLaser(-10)
+    module.fireLaser(-5)
+    module.fireLaser(5)
     module.fireLaser(10)
     module.fireLaser(20)
-    module.fireLaser(40)
 end
 
 module.dragShip = function(event)
