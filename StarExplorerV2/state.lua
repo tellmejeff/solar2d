@@ -1,16 +1,17 @@
 local module = {}
+local gameConfig = require('gameConfig')
 
 module.init = function(group)
-    module.lives = 3
+    module.lives = gameConfig.lives
     module.score = 0
     module.highScore = 0
     module.died = false
     module.steps = 0;
     module.gameLoopTimer = nil
-    module.asteroidsAcceleration = 20
-    module.creationAcceleration = 1
-    module.accelerationInterval = 10
-    module.accelerationStep = 5
+    module.asteroidsAcceleration = gameConfig.asteroidsAcceleration
+    module.accelerationIncreaseInterval = gameConfig.accelerationIncreaseInterval
+    module.maxAsteroids = gameConfig.maxAsteroids
+    module.accelerationStep = gameConfig.accelerationStep
     module.ableToFire = true
     module.paused = false
     module.group = group
@@ -23,8 +24,8 @@ module.reset = function()
     module.lives = 3
     module.score = 0
     module.died = false
-    module.asteroidsAcceleration = 0
-    module.creationAcceleration = 0
+    module.asteroidsAcceleration = gameConfig.asteroidsAcceleration
+    module.creationAcceleration = gameConfig.creationAcceleration
     module.steps = 0
     module.ableToFire = true
     module.livesText.text = 'Lives: ' .. module.lives
@@ -38,11 +39,9 @@ module.updateText = function()
 end
 
 module.updateSteps = function()
-    if (module.steps >= module.accelerationInterval) then
+
+    if (module.steps % module.accelerationIncreaseInterval == 0) then
         module.asteroidsAcceleration = module.asteroidsAcceleration + module.accelerationStep
-        if (module.asteroidsAcceleration % 100 == 0) then
-            module.creationAcceleration = module.creationAcceleration + 1
-        end
         module.steps = 0
     end
     module.steps = module.steps + 1
@@ -70,8 +69,10 @@ module.shipDestroyed = function(ship)
         module.ableToFire = true
     end)
     if (module.lives == 0) then
-        local gameOverText = display.newText(module.group, "GAME OVER", display.contentWidth / 2, display.contentHeight /2, native.systemFont, 36)
-        timer.performWithDelay(2000, function() display.remove(gameOverText)  end)
+        local gameOverText = display.newText(module.group, "GAME OVER", display.contentWidth / 2, display.contentHeight / 2, native.systemFont, 36)
+        timer.performWithDelay(2000, function()
+            display.remove(gameOverText)
+        end)
     end
     return module.lives == 0
 end

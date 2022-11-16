@@ -19,23 +19,23 @@ local function createAsteroid()
         -- from the left
         newAsteroid.x = -60
         newAsteroid.y = math.random(500)
-        newAsteroid:setLinearVelocity(math.random(40, 120 + module.state.asteroidsAcceleration), math.random(20, 60 + module.state.asteroidsAcceleration))
+        newAsteroid:setLinearVelocity(math.random(30, 90 + module.state.asteroidsAcceleration), math.random(30, 90 + module.state.asteroidsAcceleration))
     elseif (whereFrom == 2) then
         -- from the top
         newAsteroid.x = math.random(display.contentWidth)
         newAsteroid.y = -60
-        newAsteroid:setLinearVelocity(math.random(-40, 40 + module.state.asteroidsAcceleration), math.random(40, 120 + module.state.asteroidsAcceleration))
+        newAsteroid:setLinearVelocity(math.random(-30, 30 + module.state.asteroidsAcceleration), math.random(30, 90 + module.state.asteroidsAcceleration))
     elseif (whereFrom == 3) then
         -- from the right
         newAsteroid.x = display.contentWidth + 60
         newAsteroid.y = math.random(500)
-        newAsteroid:setLinearVelocity(math.random(-120, 40 + module.state.asteroidsAcceleration), math.random(20, 60 + module.state.asteroidsAcceleration))
+        newAsteroid:setLinearVelocity(math.random(-90, 30 + module.state.asteroidsAcceleration), math.random(30, 90 + module.state.asteroidsAcceleration))
     end
-    newAsteroid:applyTorque(math.random(-6, 6))
+    newAsteroid:applyTorque(math.random(-10, 10))
 end
 
 module.createAsteroids = function()
-    for i = 0, module.state.creationAcceleration, 1 do
+    for i = #module.asteroidsTable, module.state.maxAsteroids+1, 1 do
         createAsteroid()
     end
 end

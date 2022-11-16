@@ -52,8 +52,9 @@ end
 
 local function endGame()
 	asteroids.removeAllAsteroids()
+	composer.setVariable('finalScore', state.score)
 	state.reset()
-	composer.gotoScene('menu', {time=800, effect='crossFade'})
+	composer.gotoScene('highscores', {time=800, effect='crossFade'})
 end
 
 local function onCollision(event)
